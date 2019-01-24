@@ -42,8 +42,14 @@
 
     </div>
 
-    <script>
+    <button id="btn">?</button>
 
+    <script>
+        btn.onclick = function() {
+            var nameFile = document.getElementById("firstlist-uploadbtn").files[0].name;
+            document.getElementById('firstlist-subtitle').innerHTML = nameFile;
+            console.log(nameFile);
+        }
     </script>
 
 </div>
