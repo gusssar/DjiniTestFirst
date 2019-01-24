@@ -23,6 +23,7 @@ body{
 
 .content-accept-firstlist,
 .content-accept-secondlist{
+    position: relative;
     padding: 20px 0 10px;
 }
 
@@ -56,16 +57,17 @@ object{
 }
 #firstlist-uploadbtn,
 #secondlist-uploadbtn{
-    position: relative;
-    left:-50px;
-    top: -25px;
-    width: 40px;
-    height: 40px;
+    position: absolute;
+    width: 400px;
+    height: 60px;
     opacity: 0;
-    z-index: 2
+    z-index: 2;
+}
+#firstlist-uploadbtn:hover{
+    cursor: pointer;
 }
 
 .imageclass{
-    margin-right: -40px;
-    margin-bottom: -40px;
+    /*margin-right: -40px;*/
+    /*margin-bottom: -40px;*/
 }
