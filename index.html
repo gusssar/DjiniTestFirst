@@ -10,45 +10,95 @@
     <div class="content-accept-title">Подтверждение аккаунта</div>
     <div class="content-accept-subtitle subtitle">Для подтверждения вашего аккаунта вам нужно заполнить все поля,
         подтвердить почтовый ящик и телефон, а также загрузить сканы ваших документов</div>
+    <!--Первая часть-->
     <div class="content-accept-firstlist">
-        <div class="imageclass"><object type="image/svg+xml"
+        <input type="file"
+               name="upload-first"
+               id="firstlist-uploadbtn"
+               size="5e+6"
+               accept="image/*"
+               onchange="OnChangeFirst()">
+        <div class="imageclass" id="image-firstlist">
+            <object type="image/svg+xml"
                      data="./src/upload.svg"></object>
-            <input type="file"
-                   name="upload-first"
-                   id="firstlist-uploadbtn"
-                   size="5e+6"
-                   accept="image/*">
+
         </div>
         <div>
             <div id="firstlist-title">Загрузить скан странцы с фотографией</div>
             <div class="subtitle" id="firstlist-subtitle">Размер файла не более 5Мб</div>
         </div>
-        <div class="status">status</div>
+        <div class="status" id="firstlist-status">status</div>
     </div>
+    <!--Вторая часть-->
     <div class="content-accept-secondlist">
-        <div class="imageclass"><object type="image/svg+xml"
+        <input type="file"
+               name="upload-second"
+               id="secondlist-uploadbtn"
+               size="5e+6"
+               accept="image/*"
+               onchange="OnChangeSecond()">
+        <div class="imageclass" id="image-secondlist"><object type="image/svg+xml"
                     data="./src/upload.svg"></object>
-            <input type="file"
-                   name="upload-second"
-                   id="secondlist-uploadbtn"
-                   size="5e+6"
-                   accept="image/*">
+
         </div>
         <div>
             <div id="secondlist-title">Загрузить скан страницы с пропиской</div>
             <div class="subtitle" id="secondlist-subtitle">Размер файла не более 5Мб</div>
         </div>
-        <div class="status">status</div>
+        <div class="status" id="secondlist-status">status</div>
 
     </div>
 
-    <button id="btn">?</button>
 
     <script>
-        btn.onclick = function() {
-            var nameFile = document.getElementById("firstlist-uploadbtn").files[0].name;
-            document.getElementById('firstlist-subtitle').innerHTML = nameFile;
-            console.log(nameFile);
+        console.dir(document.getElementById("firstlist-uploadbtn"));
+        function OnChangeFirst() {
+            let name_file_first = document.getElementById("firstlist-uploadbtn").files[0].name;
+                if (name_file_first){
+                    let image = document.getElementById('image-firstlist');
+                    let status =  document.getElementById('firstlist-status');
+                    let title = document.getElementById('firstlist-title');
+                    let subtitle =  document.getElementById('firstlist-subtitle');
+                        image.innerHTML='<object type=\"image/svg+xml\" data=\"./src/wait.svg\"><\/object>';
+                        status.innerHTML='<span style="color:#999999">Идёт проверка</span>';
+                        title.innerHTML='Файл загружен';
+                        subtitle.innerHTML= name_file_first; //необходимо добавить размер (333 Кб)
+
+                    function Randomize(min, max){
+                        let rand = min - 0.5 + Math.random() * (max - min + 1);
+                        rand = Math.round(rand);
+                        if (rand>5){
+                            image.innerHTML='<object type=\"image/svg+xml\" data=\"./src/ok.svg\"><\/object>';
+                            status.innerHTML='<span style="color:#77B53C">Проверено</span>';
+                            title.innerHTML='Страница с фотографией';
+                        } else {
+                            image.innerHTML='<object type=\"image/svg+xml\" data=\"./src/upload.svg\"><\/object>';
+                            status.innerHTML='<span style="color:#cc3333">Отклонено</span>';
+                            title.innerHTML='Загрузить скан странцы с фотографией';
+                            subtitle.innerHTML='Размер файла не более 5Мб';
+                            document.getElementById("firstlist-uploadbtn").files[0].name='';//здесь необходимо удаление имени файла при отказе
+                        }
+                    }
+
+                    setTimeout(function () {
+                        // image.innerHTML='<object type=\"image/svg+xml\" data=\"./src/ok.svg\"><\/object>';
+                        // status.innerHTML='<span style="color:#77B53C">Проверено</span>';
+                        // title.innerHTML='Страница с фотографией';
+
+                        Randomize(0,10);
+                        console.dir(document.getElementById("firstlist-uploadbtn"));
+                    },3000);
+
+                    // document.getElementById('firstlist-status').innerHTML=
+                    //     '<span style="color:#77B53C">Проверено</span>';
+                    // document.getElementById('firstlist-status').innerHTML=
+                    //     '<span style="color:#cc3333">Отклонено</span>'
+                }
+        }
+
+        function OnChangeSecond() {
+            var name_file_second = document.getElementById("secondlist-uploadbtn").files[0].name;
+            document.getElementById('secondlist-subtitle').innerHTML = name_file_second;
         }
     </script>
 
