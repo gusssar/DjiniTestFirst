@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Профиль — Джино • Аккаунт</title>
     <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
 </head>
 <body>
 <div class="content-accept">
@@ -27,7 +28,7 @@
             <div id="firstlist-title">Загрузить скан странцы с фотографией</div>
             <div class="subtitle" id="firstlist-subtitle">Размер файла не более 5Мб</div>
         </div>
-        <div class="status" id="firstlist-status">status</div>
+        <div class="status" id="firstlist-status"></div>
     </div>
     <!--Вторая часть-->
     <div class="content-accept-secondlist">
@@ -45,62 +46,9 @@
             <div id="secondlist-title">Загрузить скан страницы с пропиской</div>
             <div class="subtitle" id="secondlist-subtitle">Размер файла не более 5Мб</div>
         </div>
-        <div class="status" id="secondlist-status">status</div>
+        <div class="status" id="secondlist-status"></div>
 
     </div>
-
-
-    <script>
-        console.dir(document.getElementById("firstlist-uploadbtn"));
-        function OnChangeFirst() {
-            let name_file_first = document.getElementById("firstlist-uploadbtn").files[0].name;
-                if (name_file_first){
-                    let image = document.getElementById('image-firstlist');
-                    let status =  document.getElementById('firstlist-status');
-                    let title = document.getElementById('firstlist-title');
-                    let subtitle =  document.getElementById('firstlist-subtitle');
-                        image.innerHTML='<object type=\"image/svg+xml\" data=\"./src/wait.svg\"><\/object>';
-                        status.innerHTML='<span style="color:#999999">Идёт проверка</span>';
-                        title.innerHTML='Файл загружен';
-                        subtitle.innerHTML= name_file_first; //необходимо добавить размер (333 Кб)
-
-                    function Randomize(min, max){
-                        let rand = min - 0.5 + Math.random() * (max - min + 1);
-                        rand = Math.round(rand);
-                        if (rand>5){
-                            image.innerHTML='<object type=\"image/svg+xml\" data=\"./src/ok.svg\"><\/object>';
-                            status.innerHTML='<span style="color:#77B53C">Проверено</span>';
-                            title.innerHTML='Страница с фотографией';
-                        } else {
-                            image.innerHTML='<object type=\"image/svg+xml\" data=\"./src/upload.svg\"><\/object>';
-                            status.innerHTML='<span style="color:#cc3333">Отклонено</span>';
-                            title.innerHTML='Загрузить скан странцы с фотографией';
-                            subtitle.innerHTML='Размер файла не более 5Мб';
-                            document.getElementById("firstlist-uploadbtn").files[0].name='';//здесь необходимо удаление имени файла при отказе
-                        }
-                    }
-
-                    setTimeout(function () {
-                        // image.innerHTML='<object type=\"image/svg+xml\" data=\"./src/ok.svg\"><\/object>';
-                        // status.innerHTML='<span style="color:#77B53C">Проверено</span>';
-                        // title.innerHTML='Страница с фотографией';
-
-                        Randomize(0,10);
-                        console.dir(document.getElementById("firstlist-uploadbtn"));
-                    },3000);
-
-                    // document.getElementById('firstlist-status').innerHTML=
-                    //     '<span style="color:#77B53C">Проверено</span>';
-                    // document.getElementById('firstlist-status').innerHTML=
-                    //     '<span style="color:#cc3333">Отклонено</span>'
-                }
-        }
-
-        function OnChangeSecond() {
-            var name_file_second = document.getElementById("secondlist-uploadbtn").files[0].name;
-            document.getElementById('secondlist-subtitle').innerHTML = name_file_second;
-        }
-    </script>
 
 </div>
 </body>
